@@ -1,0 +1,150 @@
+<md-content class="rjTextColor background">
+	<!-- BEGIN Ride Summary -->
+	<div layout-margin class="rjTitleColor">
+		<p>RIDE SUMMARY</p>
+	</div>
+	
+	<div layout="column" class="rideDivColor">
+		<div layout="row">
+			<div layout="row" layout-align="start center" flex>
+				<div layout-margin>Ride Distance</div>
+			</div>
+			<div layout="row" layout-align="end center" flex>
+				<div layout-margin class="rjNumberText">{{rideDistance}} {{unitString}}</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- BEGIN Ride Max And Avg Speed Chart -->
+	<div layout="column" class="splitDivColor rideDivColor">
+		<div layout="row">			
+			<div flex layout="column" layout-align="center center" style="text-align:center">	
+				<div id="avgSpeed">Placeholder for Avg speed chart</div>
+			</div>
+			<div flex layout="column" layout-align="center center" style="text-align:center">		
+				<div id="maxSpeed">Placeholder for max speed chart</div>
+			</div>
+		</div>
+	</div>
+	<!-- END Ride Max And Avg Speed Chart -->
+	
+	<!-- BEGIN Ride Summary UI -->
+	<div layout="column" class="rideDivColor splitDivColor" ng-show="isDayModeDataAvalible">
+		<div layout="row">
+			<div flex="30" style="text-align:center">
+				<div class=stat_img><img src="images/clock_icon.png" width="128px" height="128px" alt="User Image"></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{totalTime}}</div>
+				<div class="nullifyMargin rjText">Total</div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{onRideTime}}</div>
+				<div class="nullifyMargin rjText">On Ride</div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{idealTime}}</div>
+				<div class="nullifyMargin rjText">Idle</div>
+			</div>
+		</div>
+	</div>
+	<!-- END Ride Summary UI -->
+	<!-- END Ride Summary -->
+	
+	<!-- BEGIN Day split Analysis -->
+	<div layout-margin class="rjTitleColor">
+		<p>DAY SPLIT ANALYSIS</p>
+	</div>
+	
+	<!-- BEGIN Day mode -->
+	<div layout="column" class="rideDivColor" ng-show="isDayModeDataAvalible">
+		<div layout="row">
+			<div flex="30" style="text-align:center">
+				<div class=stat_img><img src="images/don_image.png" width="128px" height="128px" alt="User Image"></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{dawnDistance}}</div>
+				<div class="nullifyMargin rjText">Distance <span>({{unitString}})</span></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{dawnAvgSpeed}}</div>
+				<div class="nullifyMargin rjText">Avg.speed <span>({{speedUnitString}})</span></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{dawnMaxSpeed}}</div>
+				<div class="nullifyMargin rjText">Max.speed <span>({{speedUnitString}})</span></div>
+			</div>
+		</div>
+	</div>
+	<!-- END Day mode -->
+	
+	<!-- BEGIN night mode -->
+	<div layout="column" class="rideDivColor" ng-show="isNightModeDataAvalible">
+		<div layout="row">
+			<div flex="30" style="text-align:center">
+				<div class=stat_img><img src="images/dusk_image.png" width="128px" height="128px" alt="User Image"></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{duskDistance}}</div>
+				<div class="nullifyMargin rjText">Distance <span>({{unitString}})</span></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{duskAvgSpeed}}</div>
+				<div class="nullifyMargin rjText">Avg.speed <span>({{speedUnitString}})</span></div>
+			</div>
+			<md-divider vertical class="verticalDivide"></md-divider>
+			<div flex="30" layout="column" layout-margin layout-align="center center" style="text-align:center">
+				<div class="nullifyMargin rjNumberText">{{duskMaxSpeed}}</div>
+				<div class="nullifyMargin rjText">Max.speed <span>({{speedUnitString}})</span></div>
+			</div>
+		</div>
+	</div>
+	<!-- END night mode -->	
+	
+	<!-- BEGIN Day Split Graph -->
+	<div layout="column" class="splitDivColor rideDivColor">
+		<div style="margin-top:10px">
+			<canvas id="daySplitAvgMax" class="chart-horizontal-bar" height="200" chart-data="daySplitData" chart-labels="daySplitLabels" chart-series="daySplitSeries" chart-options="daySplitOptions" chart-dataset-override="daySplitDataset">
+			</canvas>
+		</div>
+	</div>
+	<!-- END Day Split Graph -->
+	<!-- END Day split Analysis -->
+	
+	<!-- BEGIN Speed Analysis -->
+	<div layout-margin class="rjTitleColor">
+		<p>SPEED ANALYSIS</p>
+	</div>
+	
+	<!-- BEGIN Speed Analysis Graph -->
+	<div layout="column" class="splitDivColor rideDivColor">
+		<div style="margin-top:10px">
+			<canvas id="speedAnalysisChart" class="chart-bar" chart-data="speedAnalysisData" chart-labels="speedAnalysisLabels"  chart-series="speedAnalysisSeries" chart-options="speedAnalysisOptions" chart-dataset-override="speedAnalysisDataset"></canvas>
+		</div>	
+	</div>
+	<!-- END Speed Analysis Graph -->
+	<!-- END Speed Analysis -->
+	
+	<!-- BEGIN Elevation Analysis -->
+	<div layout-margin class="rjTitleColor">
+		<p>ELEVATION ANALYSIS</p>
+	</div>
+	
+	<!-- BEGIN Elevation Analysis Graph -->
+	<div layout="column" class="splitDivColor rideDivColor">
+		<div style="margin-top:10px">
+			<canvas id="elevationAvgMax" class="chart chart-line" chart-data="elevationData" chart-labels="elevationLabels" chart-series="elevationSeries" chart-options="elevationOptions" chart-dataset-override="elevationDataset">
+			</canvas>
+		</div>	
+	</div>
+	<!-- END Elevation Analysis Graph -->
+	<!-- END Elevation Analysis -->
+</md-content>

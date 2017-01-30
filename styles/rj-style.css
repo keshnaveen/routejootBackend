@@ -1,0 +1,175 @@
+@font-face {
+  font-family: OpenSans-Bold;
+  src: url(/app/fonts/OpenSans-Bold_0.ttf);
+}
+@font-face {
+  font-family: OpenSans-LightItalic;
+  src: url(/app/fonts/OpenSans-LightItalic_0.ttf);
+}
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url(/app/fonts/OpenSans-Regular_0.ttf);
+}
+.hdr_properties {
+  color: #F5B80A;
+  font-weight: bold;
+  text-shadow: 9px 14px 13px black;
+}
+.center_pos_properties {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+body {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.back-img {
+  background-image: url(/content/images/the_road_home_large.jpg);
+}
+body:after {
+  position: absolute;
+}
+.headerColor {
+  font-size: 50px;
+  color: #F5B80A;
+  font-weight: bold;
+  text-shadow: 9px 14px 13px black;
+  font-family: OpenSans-LightItalic !important;
+}
+.divcenter {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 23%;
+}
+.logocenter {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 13%;
+}
+.frm-center {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  top: 20%;
+}
+.img-width {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.paraColor {
+  color: #EFAD04;
+  font-size: 16px;
+  font-family: OpenSans-LightItalic !important;
+}
+.paraEnd {
+  color: #EFAD04;
+  font-size: 18px;
+  font-family: OpenSans-LightItalic !important;
+  font-weight: 600;
+}
+.term-bg {
+  background-color: #363636;
+}
+.paragraph {
+  color: white;
+  font-family: OpenSans-Regular;
+  padding-left: 18px;
+}
+.headings {
+  color: #F5B80A;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: OpenSans-Regular;
+}
+#hgh_lg {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-color: #F5B80A;
+  background-color: white;
+  color: #F5B80A;
+}
+.m-tb-x {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+.mt-tb-xx {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+body#reset_pg {
+  background-color: #363636;
+}
+body.confirm_pg {
+  background-color: #363636;
+}
+.text-line {
+  background-color: transparent!important;
+  color: #FFFFFF !important;
+  outline: none !important;
+  outline-style: none !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: solid #EFAD04 1px !important;
+  padding: 3px 10px !important;
+  border-radius: 0px !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-transition: none !important;
+  -o-transition: none !important ;
+  transition: none !important;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #363636 inset !important;
+  -webkit-text-fill-color: white !important;
+}
+.btn_yellow {
+  background-color: #EFAD04 !important;
+  color: #FFFFFF !important;
+  border-radius: 2px !important;
+  padding: 9px 12px !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+}
+form-control:focus {
+  border-color: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: inset none !important;
+}
+.errorText {
+  color: #FF0301 ;
+  float: left !important;
+}
+@media (max-width: 768px) {
+  .headerColor {
+    color: #F5B80A;
+    font-weight: bold;
+    text-shadow: 9px 14px 13px black;
+    font-size: 30px !important;
+  }
+  .img_res {
+    width: 120px !important;
+    height: 120px !important;
+  }
+  .frm-center {
+    position: absolute !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 16%;
+  }
+}

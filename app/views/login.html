@@ -1,0 +1,18 @@
+<div layout="row" layout-align="center">
+	<md-content flex="30" flex-sm="100" flex-xs="100" layout-padding>
+		<div layout="column" layout-align-gt-md="center">
+			<div layout="column" layout-align="center center" layout-margin> 
+				<img alt="Routejoot Icon" src="images/logo.png" class="banner_image" >
+			</div>
+			<md-input-container class="md-block md-raised" >
+            	<label>Email OR Phone</label>
+            	<input ng-model="email">
+          	</md-input-container>
+          	<md-input-container class="md-block md-raised">
+            	<label>Password</label>
+            	<input ng-model="password">
+          	</md-input-container>
+          	<md-button class="md-primary md-raised" ng-click="loginUser()" style="margin:0">LOGIN</md-button>
+		</div>
+	</md-content>
+</div>

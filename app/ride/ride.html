@@ -1,0 +1,147 @@
+<md-content ng-if="!isMobile" layout="row" layout-xs="column" layout-sm="column" style="background-color:#0d0d0d;height:100%">	
+	<div layout="column" class="tab_width" layout-align="stretch" ng-include="'/_layouts/desktop-ride-side-menu.html'"></div>
+
+	<div layout="column" layout-align="stretch" class="map_width" style="height:100%">	
+			<md-content layout-align="center center" flex class="layout-fill">
+				<div ng-controller="googleMapsCtrl" id="googleMap" class="layout-fill"></div>	
+				<md-button class="md-accent md-fab md-fab-bottom-right" ng-click='isclicked = !isclicked;loadRideimage()' ng-init="isclicked=false">Image</md-button>	
+			</md-content>
+			
+			<md-content layout="column" flex style="height:160px;transition: all linear 0.5s;background-color:#333;" ng-hide='!isclicked'>
+				<div class="scrollmenu" id="scrollMenu" ng-mouse-wheel-up style="overflow-x: hidden;overflow-y: hidden;">
+					<span ng-repeat="rideImage in finalImages"  class="ride_image"><img src="{{rideImage.imageUrl}}" alt="User Image" class="rideImg"></span>			 
+				</div>
+ 			</md-content>
+	</div>
+</md-content>
+
+  <md-content ng-if="isMobile" flex layout="column">
+      <md-tabs md-tabs-fixed  md-dynamic-height md-stretch-tabs="always" md-border-bottom="" md-selected="selectedIndex" md-center-tabs="true">
+      <md-tab label="Summary" md-autoselect>
+        <md-content class="md-padding">
+          <md-content layout-margin style="width:95%;background-color:#242329;color:#bcbcbc;"">
+			<div layout="column">
+				<div layout="row" class="rjDivColor">
+					<div flex="35">
+						<div class="user_img"><img src="{{userImage || 'images/default_user.png'}}" width="128px" height="128px" alt="User Image"></div>
+					</div>
+					<div layout="column" layout-align="center none" flex>
+						<div>
+							<b>{{userFullName}}</b>
+						</div>
+						<div layout="row" style="font-size:11px;font-weight:bold;">
+							<p flex="30">{{calculateAge(userAge)}} Years</p>
+							<p flex>{{userGender}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div layout="column" class="rjDivColor" style="margin-top: 15px;font-size:12px;font-weight:bold" layout-padding>
+				<div layout="row" layout-align="start">
+						<div ng-if="rideStatus == 0" flex="60"><b>User Status</b></div>
+						<div ng-if="rideStatus == 1" flex="40"><b>User Status</b></div>
+						<div ng-if="rideStatus == 3" flex="60"><b>User Status</b></div>
+						
+						<div ng-if="rideStatus == 0" flex><b>Riding</b></div>
+						<div ng-if="rideStatus == 1" flex><b><span style="color:green">Completed</span> on</b><br/><b> {{rideEndDate | date: 'dd/MM/yyyy' || 'Computing'}}</b></div>
+						<div ng-if="rideStatus == 3" flex><b><span style="color:red">Cancelled</span></b></div>
+				</div>
+				<div ng-if="batteryLevel != 'N/A' && rideStatus != 1" layout="row" layout-align="start">
+						<div flex="60"><b>Phone Battery Level</b></div>
+						<div flex><b>{{batteryLevel}}</b></div>					
+				</div>
+			</div>
+			<div ng-if="rideStatus == 1" layout="column" layout-align="start" class="rjDivColor" style="margin-top:15px;font-size:12px;font-weight:bold;" layout-padding>
+				<div flex="40"><b class="rj_title">Ride Analysis</b></div>
+					<div layout="row" flex layout-align="center center" style="padding:0" class="summary_border">
+						<div layout="column" layout-align="center center" flex style="border-right: solid 1px #404040;">
+							<p layout-margin>Distance</p>
+							<p class="rj_number" >{{rideDistance || '--' }}</p>
+							<p>KMS</p>
+						</div>
+						<div layout="column" layout-align="center center" flex style="border-right: solid 1px #404040;">
+							<p layout-margin>Max Speed</p>
+							<p class="rj_number">{{rideMaxSpeed || '--' }}</p>
+							<p>KMS/Hr</p>
+						</div>
+						<div layout="column" layout-align="center center" flex>
+							<p layout-margin>Avg Speed</p>
+							<p class="rj_number">{{rideAvgSpeed || '--' }}</p>
+							<p>KMS/Hr</p>
+						</div>
+					</div>
+					<div layout="row" flex layout-align="center center" class="summery_border_bottom" style="padding:0">
+						<div layout="column" layout-align="center center" flex style="border-right: solid 1px #404040;">
+							<p layout-margin>Total Time</p>
+							<p class="rj_number">{{rideTotalTime | date:'HH:mm' || '--:--' }}</p>
+							<p>Hr:Min</p>
+						</div>
+						<div layout="column" layout-align="center center" flex style="border-right: solid 1px #404040;">
+							<p layout-margin>Ride Time</p>
+							<p class="rj_number">{{rideRideTime | date:'HH:mm' || '--:--' }}</p>
+							<p>Hr:Min</p>
+						</div>
+						<div layout="column" layout-align="center center" flex>
+							<p layout-margin>StandBy</p>
+							<p class="rj_number">{{rideStandbyTime | date:'HH:mm' || '--:--' }}</p>
+							<p>Hr:Min</p>
+					   </div>
+				</div>
+			</div>
+			<div ng-if="rideStatus == 0" layout="column" layout-align="start" class="rjDivColor" style="margin-top: 15px;font-size:12px;font-weight:bold;overflow:auto;" layout-padding>
+				<div layout="column">
+					<div><b class="rj_title">Ride Estimations</b></div>
+				</div>
+				<div layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>Time Elapsed</b></div>
+					<div flex class="rj_number"><p>{{rideTotalTimeTaken || '--'}}</p></div>							
+				</div>	
+				<div layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>Last Updated At</b></div>
+					<div flex class="rj_number"><p>{{rideLastUpdatedOn | date: 'hh:mm:ss a'  || '--'}}</p></div>							
+				</div>		
+				<div layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>Ride Status</b></div>
+					<div ng-if="lastRideStatus == 0" flex><b>Riding</b></div>	
+					<div ng-if="lastRideStatus == 1" flex><b>Paused</b></div>	
+					<div ng-if="lastRideStatus == 2" flex><b>Completed</b></div>
+					<div ng-if="lastRideStatus == 3" flex><b>Cancelled</b></div>					
+				</div>
+				<div layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>Distance Covered</b></div>
+					<div flex class="rj_number"><p>{{rideDistanceCovered || '--'}} Kms</p></div>							
+				</div>	
+				<div ng-if="isDestinationRide" layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>ETA</b></div>
+					<div flex class="rj_number"><p>{{rideETA || '--'}}</p></div>							
+				</div>
+				<div ng-if="isDestinationRide" layout="row" style="border: solid 1px #404040;">
+					<div flex="60"><b>Distance to Cover</b></div>
+					<div flex class="rj_number"><p>{{rideDistancetoCover || '--'}}</p></div>							
+				</div>	
+			</div>
+		</md-content>
+        </md-content>
+      </md-tab>
+      <md-tab md-on-select="initMobileMap()" label="Map">
+        <md-content layout-align="center center" flex class="layout-fill">
+			<div ng-controller="googleMapsCtrl" id="mobileGoogleMap" class="googleMapMobile" style="width: 100%;height: 600px;" class="layout-fill"></div>	
+		</md-content>     
+      </md-tab>
+      <md-tab md-on-select="loadRideimage()" label="Gallery">
+        <md-content class="md-padding" style="margin-top: 33%;">
+        <ul rn-carousel rn-carousel-buffered class="my-slider height300">
+  			<li ng-repeat="rideImage in finalImages">
+			     <div class="layer height300 text-center" ><img src="{{rideImage.imageUrl}}" alt="User Image" class="rideImg"></div>
+			     <div class="debug ng-binding">
+	              	{{rideImage.slide_number}} / {{total_count}}
+	              <br>Taken On: {{rideImage.taken_on}}
+	              <br>{{rideImage.location.place.address}}
+	              <br>
+	            </div>
+			</li>
+		</ul>  	
+        </md-content>
+      </md-tab>
+    </md-tabs>
+  </md-content>
