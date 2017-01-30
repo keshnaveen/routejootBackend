@@ -426,13 +426,12 @@ angular.module('RoutejootWebSite')
 			   var eleAvg = [];
 			   /*END code for Elevation analysis Graph*/
 			   
-			   for(var i=0; i<=10; i++){
-				   if(splitCount <= rideSplitCountResp.data.ride_split_count){		
-					   
-					   $scope.speedAnalysisLabels[i] = $rootScope.ConvertKmsToMls(splitCount).toString();
-					   $scope.elevationLabels[i] = $rootScope.ConvertKmsToMls(splitCount).toString();
-					   
+			   for(var i=0; i<10; i++){
+				   if(splitCount <= rideSplitCountResp.data.ride_split_count){						   
 					   var httprequest = $rootScope.baseUrl+$rootScope.DistancewiseRideSplitUrl+'?ride_id='+$scope.rideId+'&from_distance='+splitCount+'&to_distance='+splitNextCount;
+					  		
+					   splitCount = splitNextCount;
+					   splitNextCount+=split;	
 					   
 					   $.ajax({
 					        type: "GET",
@@ -442,16 +441,20 @@ angular.module('RoutejootWebSite')
 					            if(response.result != 0)
 					            	reportError(daySplitResponse.result);
 					            else{
-					            	maxSpeed[i] = $rootScope.ConvertKmsToMls(response.data.max_speed);
-					            	avgSpeed[i] = $rootScope.ConvertKmsToMls(response.data.avg_speed);
-					            	eleAvg[i] = (response.data.elevation_max+response.data.elevation_min)/2;				  
+					            	if(splitCount <= rideSplitCountResp.data.ride_split_count){
+					            		maxSpeed[i] = $rootScope.ConvertKmsToMls(response.data.max_speed);
+						            	avgSpeed[i] = $rootScope.ConvertKmsToMls(response.data.avg_speed);
+						            	eleAvg[i] = (response.data.elevation_max+response.data.elevation_min)/2;
+					            	}					            					  
 					            }
 					        },
 					        fail:function(error){reportError(error);}
-					    });
+					    });					  
 					   
-					   splitCount = splitNextCount;
-					   splitNextCount+=split;					 
+					   if(splitCount <= rideSplitCountResp.data.ride_split_count){
+						   $scope.speedAnalysisLabels[i] = $rootScope.ConvertKmsToMls(splitCount).toString();
+						   $scope.elevationLabels[i] = $rootScope.ConvertKmsToMls(splitCount).toString();
+					   }
 				   }
 			   }			   			   			 
 			   
