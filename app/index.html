@@ -47,7 +47,7 @@
 		<div style="height:100%" id="loader" layout="row" flex layout-sm="row" ng-hide="hidden" class="hiddenBackground" ng-class="{fade: !isMainLoading}" layout-align="center center">
     		<md-progress-circular md-mode="indeterminate"></md-progress-circular>
   		</div>
-    	<div style="height:100%" id="rjContent" ng-show="!isMainLoading">
+    	<div style="height:auto" id="rjContent" ng-show="!isMainLoading" class="background">
     		<div resize ng-view="" flex layout="column" layout-align="stretch" layout-wrap layout-fill id="start"></div>
     	</div>
 	</body>
@@ -61,5 +61,6 @@
     <script src="scripts/controllers/ride-statistics-controller.js"></script>
     <script src="scripts/controllers/user-statistics-controller.js"></script>
     <script src="scripts/controllers/event-statistics-controller.js"></script>
+    <script src="scripts/controllers/legal-controller.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.25&key=AIzaSyCUkbiBi3HHflj9hfeNrwzPWrVyqLgysTw&libraries=geometry&callback=initMap"></script>
 </html>

@@ -130,6 +130,12 @@ angular.module('RoutejootWebSite', [
           controllerAs: 'eventStatistics',
           title:'Event Statistics'
       })
+      .when('/legal/termsAndCondition',{
+    	  templateUrl: 'views/legal/terms-and-conditions.html',
+    	  controller: 'legalCtrl',
+          controllerAs: 'legalCtrl',
+          title:'Terms And Conditions'
+      })
       .otherwise({
     	  redirectTo:'/eventStatistics'
       });
